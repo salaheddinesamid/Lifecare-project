@@ -1,6 +1,7 @@
 import React from "react";
 import "../Styles/Header.css"
-import logo from "../nurse.avif"
+import logo from "../doctor.png";
+import TextField from "@mui/material/TextField"
 
 export function Header(){
     return(
@@ -8,7 +9,7 @@ export function Header(){
             <div className="col-xl-4">
                 <div className="row">
                     <div className="col-xl-10">
-                        <h3>Hello, <span class="material-symbols-outlined" style={{fontSize:"40px"}}>waving_hand</span></h3>
+                        
                     </div>
                 </div>
                 <div className="row">
@@ -18,7 +19,7 @@ export function Header(){
                 </div>
             </div>
             <div className="col-xl-3" style={{color:'white'}}>
-                <input type="text" className="form-control" style={{}} placeholder="Search anything" />
+            <input class="form-control"  id="exampleDataList" placeholder="Type to search..."/>
             </div>
             <div className="col-xl-5">
                 <div className="row d-flex align-items-center">
@@ -39,7 +40,16 @@ export function Header(){
                         </div>
                         <div className="col-xl-4">
                             <div className="row">
-                               
+                               <h5>
+                                Salaheddine
+                               </h5>
+                            </div>
+                            <div className="row">
+                               <p style={{
+                                fontSize:10
+                               }}>
+                                Admin
+                               </p>
                             </div>
                         </div>
                     </div>

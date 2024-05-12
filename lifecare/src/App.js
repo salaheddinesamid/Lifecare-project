@@ -1,3 +1,7 @@
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
@@ -7,7 +11,7 @@ import "bootstrap/dist/js/bootstrap"
 import { Dashboard } from './pages/Dashboard';
 function App() {
   return (
-    <div className="App">
+    <div className="App" style={{height:"100%"}}>
       <BrowserRouter>
         <Routes>
           <Route path='' element={<Login/>}/>
