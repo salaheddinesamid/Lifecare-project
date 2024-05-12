@@ -52,13 +52,13 @@ export function Dash(){
              <div className="row mt-4" style={{
                 justifyContent:"space-between"
              }}>
-                <div className="col-xl-7">
+                <div className="col-xl-8 me-1">
                     <div className="row">
                         <PatientManagement/>
                     </div>
                 </div>
-                <div className="col-xl-4 ">
-                    <div className="row">
+                <div className="col">
+                    <div className="row" >
                         <Patient/>
                     </div>
                     <div className="row">

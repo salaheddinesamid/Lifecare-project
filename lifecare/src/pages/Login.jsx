@@ -18,8 +18,8 @@ export function Login(){
                 'Content-Type ' : 'application/json'
             }
         }).then((res)=>{
-            localStorage.setItem('accessToken',res.data)
-            console.log(user)
+            localStorage.setItem('accessToken',res.data.accessToken)
+            console.log(res.data)
         }).then(
             ()=>{
                 if(token !== undefined){

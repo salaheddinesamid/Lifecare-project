@@ -11,7 +11,7 @@ export function Card(props){
         
     }
     return(
-        <div className="col-xl-10" style={{
+        <div className="col-xl-11" style={{
             borderRadius:10,
             backgroundColor:backgroundColor,
             height:150,

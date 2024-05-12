@@ -92,24 +92,24 @@ export function Dashboard(){
         {
             token != "null"  ? 
              <div className="row" style={{color:"white"}}>
-                <div className="col-xl-3">
-               <div className="row">
-                <div className="row mt-3">
-            <div className="row">
-                <div className="col-xl-10">
-                    <h3 className="text-center">
-                        Life <span style={{color:"#00FFFF",fontWeight:"bold"}}>Care </span>
-                    </h3>
-                </div>
-            </div>
-            <div className="row justify-content-end">
-                <div className="col-xl-10 ">
+                <div className="col-xl-2">
+                   <div className="row">
+                     <div className="row mt-3">
+                         <div className="row">
+                            <div className="col-xl-10 text-center">
+                               <h3 className="text-center">
+                                 Life <span style={{color:"#00FFFF",fontWeight:"bold"}}>Care </span>
+                                </h3>
+                            </div>
+                        </div>
+                              <div className="row justify-content-end">
+                                 <div className="col-xl-10 ">
 
-                    {
+                                  {
                         services.map((service)=>(
                             <div className="row mt-4">
-                                <div className="col-xl-11">
-                                   <button className="btn d-flex align-items-center" style={{color:"white",fontWeight:"bold",fontSize:"small"}} onMouseEnter={OnMouse} onMouseLeave={OnMouseLeave} onClick={()=>{
+                                <div className="col-xl-12">
+                                   <button className="btn d-flex align-items-center" style={{color:"white",fontSize:"small"}} onMouseEnter={OnMouse} onMouseLeave={OnMouseLeave} onClick={()=>{
                                     setTargetView(service.id)
                                    }}><span className={service.icon.className}>{service.icon.value}</span> {service.name}</button>
                                 </div>
@@ -129,7 +129,7 @@ export function Dashboard(){
         </div>
                 </div>
              </div>
-                <div className="col-xl-9">
+                <div className="col-xl-10">
                     <div className="row">
                         <Header/>
                     </div>
