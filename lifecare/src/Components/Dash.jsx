@@ -11,21 +11,21 @@ export function Dash(){
             "title":"Total Patient",
             "backgroundColor":"#7CC6FE",
             "spanName":"personal_injury",
-            "data":260
+            "url_request_data":"total_patient"
         },
         {
             "id":2,
             "title":"Total Appointment",
             "backgroundColor":"#C884A6",
             "spanName":"calendar_month",
-            "data":260
+            "url_request_data":"total_appointment"
         },
         {
             "id":3,
             "title":"Total Surgery",
             "backgroundColor":"#D81E5B",
             "spanName":"oncology",
-            "data":260
+            "url_request_data":"total_surgery"
         },
         {
             "id":4,
@@ -33,7 +33,7 @@ export function Dash(){
             "backgroundColor":"#FCD0A1",
             "backgroundImage":"linear-gradient(to right, #f9b9e5, #f4ccf2, #f3dffb, #f6f0ff, #ffffff)",
             "spanName":"account_balance_wallet",
-            "data":260
+            "url_request_data":"total_revenue"
         }
     ]
     return(
@@ -45,7 +45,7 @@ export function Dash(){
             
                 {
                     cards.map((card)=>(
-                        <Card title={card.title} backgroundColor={card.backgroundColor} spanName={card.spanName}/>
+                        <Card title={card.title} backgroundColor={card.backgroundColor} spanName={card.spanName} url={card.url_request_data}/>
                     ))
                 }
              </div>

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import { Dash } from "../Components/Dash";
 import { Header } from "../Components/Header";
+import { Appointment } from "../Components/Appointment";
 export function Dashboard(){
     const services = [
         {
@@ -18,6 +19,7 @@ export function Dashboard(){
         {
             "id":2,
             "name":"Appointments",
+            "View":<Appointment/>,
             "icon": {
                 "className":"material-symbols-outlined",
                 "value":"event_available"
@@ -56,7 +58,7 @@ export function Dashboard(){
         },
         {
             "id":7,
-            "name":"Help & Support",
+            "name":"Help",
             "icon": {
                 "className":"material-symbols-outlined",
                 "value":"help"
@@ -90,7 +92,7 @@ export function Dashboard(){
     return(
         <div className="row">
         {
-            token != "null"  ? 
+                token != "null"  ? 
              <div className="row" style={{color:"white"}}>
                 <div className="col-xl-2">
                    <div className="row">
@@ -119,7 +121,7 @@ export function Dashboard(){
                     <div className="row d-flex align-items-end mt-4">
                       <div className="col-xl-10">
                         <button className="btn btn-danger"><span class="material-symbols-outlined" onClick={()=>{
-                            localStorage.setItem('accessToken',"null")
+                            localStorage.setItem('accessToken',null)
                             navigate('/')
                         }}>logout</span> Log out</button>
                       </div>

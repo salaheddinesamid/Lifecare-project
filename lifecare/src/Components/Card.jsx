@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-
+import React, { useEffect, useState } from "react";
+import axios from 'axios';
 
 export function Card(props){
     const [title,setTitle] = useState(props.title)
     const [spanName,setSpanName] = useState(props.spanName);
     const [backgroundColor,setBackgroundColor] = useState(props.backgroundColor);
     const [data,setData] = useState(props.data);
-
-    function getCardData(){
-        
-    }
+    const url = props.url
+    useEffect(()=>{
+        axios.get(`http://localhost:8080/analytics/${url}`).then(res=>setData(res.data))
+    })
     return(
         <div className="col-xl-11" style={{
             borderRadius:10,
@@ -26,7 +26,7 @@ export function Card(props){
             </div>
             <div className="row d-flex align-items-end">
                 <div className="col-xl-6">
-                    <h3 style={{fontWeight:"bold"}}></h3>
+                    <h3 style={{fontWeight:"bold"}}>{data}</h3>
                 </div>
                 <div className="col-xl-6">
 
