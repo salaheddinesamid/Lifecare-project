@@ -44,27 +44,29 @@ export function Appointment(){
         const [patient,setPatient] = useState("")
         const [idNumber,setIdNumber] = useState("")
         const [dateOfBirth,setDateOfBirth] = useState("");
-        const [date,setDate]= useState(new Date().getDate())
+        
         const [address,setAddress] = useState("");
         const [postalCode,setPostalCode] = useState("");
 
         
         let [totalPrice,setTotalPrice] = useState(0);
-        let [fees,setFees] = useState(totalPrice)
-        const [termsChecked,setTermsChecked] = useState(false);
+        let [termsChecked,setTermsChecked] = useState(false)
+        let appointmentObject = {patient,idNumber,address,totalPrice};
 
-        let appointmentObject = {patient,idNumber,address,fees};
-
-        function submitRequest(){
-            let req = axios.post('http://localhost:8080/appointments/new',{
-                Headers:{
-                    'Content-Type ' : 'application/json',
+        function submitRequest() {
+            axios.post('http://localhost:8080/appointments/new', appointmentObject, {
+                headers: {
+                    'Content-Type': 'application/json',
                     "Authorization": `Bearer ${token}`
-                },
-                
-            },JSON.stringify(appointmentObject))
-
-            
+                }
+            }).then(response => {
+                console.log(response.data);
+            }).catch(error => {
+                console.error(error);
+            });
+        }
+        function checkForm(){
+            return patient && dateOfBirth && termsChecked
         }
         return(
             <div className="row" style={{
@@ -140,13 +142,25 @@ export function Appointment(){
                 </div>
                 <div className="row mt-3 mb-3 d-inline-flex justify-content-center">
                     <div className="col-xl-8">
-                        <input type="checkbox" name="" id="" value={termsChecked} />
+                        <input type="checkbox" name="" id="" value={termsChecked} onClick={()=>{
+                            if(termsChecked){
+                                setTermsChecked(false)
+                            }
+                            else{
+                                setTermsChecked(true)
+                            }
+                        }} checked={termsChecked} />
                         <p>By signing up, you agree to our Terms , Privacy Policy and Cookies Policy .</p>
                     </div>
                 </div>
                 <div className="row mt-4 mb-4 d-inline-flex justify-content-center">
-                    <div className="col-xl-10">
-                        <button className="btn btn-primary col-xl-12" onClick={submitRequest}>Confirm</button>
+                    <div className="col-xl-3">
+                        <button className="btn btn-primary col-xl-12" onClick={submitRequest} disabled={!termsChecked}>Confirm</button>
+                    </div>
+                    <div className="col-xl-3">
+                        <button className="btn btn-danger col-xl-12" onClick={()=>{
+                            setView(0)
+                        }}>Cancel</button>
                     </div>
                 </div>
             </div>
@@ -248,7 +262,7 @@ export function Appointment(){
                                             <p>{appointment.age}</p>
                                         </div>
                                         <div className="col">
-                                            <p>{appointment.fees} $</p>
+                                            <p>{appointment.totalPrice} $</p>
                                         </div>
                                         <div className="col">
                                             <p>{appointment.date}</p>

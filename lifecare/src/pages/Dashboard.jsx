@@ -5,72 +5,56 @@ import { useNavigate } from "react-router-dom";
 import { Dash } from "../Components/Dash";
 import { Header } from "../Components/Header";
 import { Appointment } from "../Components/Appointment";
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import AccessibleIcon from '@mui/icons-material/Accessible';
+import ApartmentIcon from '@mui/icons-material/Apartment';
+import TimelineIcon from '@mui/icons-material/Timeline';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import HelpIcon from '@mui/icons-material/Help';
+import DisplaySettingsIcon from '@mui/icons-material/DisplaySettings';
 export function Dashboard(){
     const services = [
         {
             "id":1,
             "name":"Dashboard",
             "View": <Dash/>,
-            "icon": {
-                "className":"material-symbols-outlined",
-                "value":"dashboard"
-            }
+            "icon": <DashboardIcon/>
         },
         {
             "id":2,
             "name":"Appointments",
             "View":<Appointment/>,
-            "icon": {
-                "className":"material-symbols-outlined",
-                "value":"event_available"
-            }
+            "icon": <CalendarMonthIcon/>
         },
         {
             "id":3,
             "name":"Patient",
-            "icon": {
-                "className":"material-symbols-outlined",
-                "value":"personal_injury"
-            }
+            "icon": <AccessibleIcon/>
         },
         {
             "id":4,
             "name":"Departments",
-            "icon": {
-                "className":"material-symbols-outlined",
-                "value":"apartment"
-            }
+            "icon": <ApartmentIcon/>
         },{
             "id":5,
             "name":"Analytics",
-            "icon": {
-                "className":"material-symbols-outlined",
-                "value":"monitoring"
-            }
+            "icon": <TimelineIcon/>
         },
         {
             "id":6,
             "name":"Financial",
-            "icon": {
-                "className":"material-symbols-outlined",
-                "value":"event_available"
-            }
+            "icon": <AttachMoneyIcon/>
         },
         {
             "id":7,
             "name":"Help",
-            "icon": {
-                "className":"material-symbols-outlined",
-                "value":"help"
-            }
+            "icon": <HelpIcon/>
         },
         {
             "id":8,
             "name":"Settings",
-            "icon": {
-                "className":"material-symbols-outlined",
-                "value":"settings"
-            }
+            "icon": <DisplaySettingsIcon/>
         }
     ]
     let [token,setToken] = localStorage.getItem('accessToken')
@@ -111,9 +95,9 @@ export function Dashboard(){
                         services.map((service)=>(
                             <div className="row mt-4">
                                 <div className="col-xl-12">
-                                   <button className="btn d-flex align-items-center" style={{color:"white",fontSize:"small"}} onMouseEnter={OnMouse} onMouseLeave={OnMouseLeave} onClick={()=>{
+                                    <button key={service.id} className="btn d-flex align-items-center" style={{color:"white",fontSize:"small"}} onMouseEnter={OnMouse} onMouseLeave={OnMouseLeave} onClick={()=>{
                                     setTargetView(service.id)
-                                   }}><span className={service.icon.className}>{service.icon.value}</span> {service.name}</button>
+                                   }}>{service.icon}{service.name}</button>
                                 </div>
                             </div>
                         ))
