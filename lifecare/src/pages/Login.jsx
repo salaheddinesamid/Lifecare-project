@@ -7,10 +7,15 @@ export function Login(){
     let [password,setPassword] = useState("")
     let user = {email,password}
     let [token,setToken] = useState(localStorage.getItem('token'));
+    const [trial,setTrial] = useState(0)
+    const [authenticationFailed,setAuthenticationFailed] = useState(false);
+    const [credentialsError,setCredentialsError] = useState("none")
     const navigate = useNavigate();
 
     const ShowError = ()=>{
-
+        if(authenticationFailed &&(trial > 0)){
+            setCredentialsError("block")
+        }
     }
     const Login = async ()=>{
         await axios.post('http://localhost:8080/admin/authenticate',JSON.stringify(user),{
@@ -22,10 +27,12 @@ export function Login(){
             console.log(res.data)
         }).then(
             ()=>{
-                if(token !== undefined){
+                if(token !== "null"){
                     navigate('/dashboard')
                 }else{
                     navigate('/')
+                    setAuthenticationFailed(true)
+                    setTrial(trial=>trial+=1)
                     ShowError();
                 }
             }

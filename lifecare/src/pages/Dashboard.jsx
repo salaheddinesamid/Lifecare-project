@@ -13,6 +13,7 @@ import TimelineIcon from '@mui/icons-material/Timeline';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import HelpIcon from '@mui/icons-material/Help';
 import DisplaySettingsIcon from '@mui/icons-material/DisplaySettings';
+import LogoutIcon from '@mui/icons-material/Logout';
 export function Dashboard(){
     const services = [
         {
@@ -76,7 +77,7 @@ export function Dashboard(){
     return(
         <div className="row">
         {
-                token != "null"  ? 
+                localStorage.getItem("accessToken") !== "null"  ? 
              <div className="row" style={{color:"white"}}>
                 <div className="col-xl-2">
                    <div className="row">
@@ -97,17 +98,17 @@ export function Dashboard(){
                                 <div className="col-xl-12">
                                     <button key={service.id} className="btn d-flex align-items-center" style={{color:"white",fontSize:"small"}} onMouseEnter={OnMouse} onMouseLeave={OnMouseLeave} onClick={()=>{
                                     setTargetView(service.id)
-                                   }}>{service.icon}{service.name}</button>
+                                   }}>{service.icon} {service.name}</button>
                                 </div>
                             </div>
                         ))
                     }
                     <div className="row d-flex align-items-end mt-4">
                       <div className="col-xl-10">
-                        <button className="btn btn-danger"><span class="material-symbols-outlined" onClick={()=>{
-                            localStorage.setItem('accessToken',null)
+                        <button className="btn btn-danger" onClick={()=>{
+                            localStorage.setItem('accessToken',"null")
                             navigate('/')
-                        }}>logout</span> Log out</button>
+                        }}><LogoutIcon/>Log out</button>
                       </div>
                     </div>
                 </div>
@@ -124,7 +125,7 @@ export function Dashboard(){
                         services.map((service)=>(
                             <div className="col-xl-12">
                                 {
-                                    service.id == targetView ? service.View : ""
+                                    service.id === targetView ? service.View : ""
                                 }
                             </div>
                         ))

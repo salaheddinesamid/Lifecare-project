@@ -168,7 +168,7 @@ export function Appointment(){
     }
     function AppointmentManagement(){
         return(
-            <div className="row">
+            <div className="row mt-4">
                 <div className="col-xl-12">
                 <div className="row mt-2 mb-2">
                     <div className="col-xl-11">
