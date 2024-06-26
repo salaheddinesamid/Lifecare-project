@@ -1,0 +1,68 @@
+.doctor-container {
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    color: black;
+}
+
+.doctor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.doctor-title h5 {
+    margin: 0;
+}
+
+.doctor-see-all p {
+    font-weight: bold;
+    color: #00FFFF;
+    cursor: pointer;
+}
+
+.doctor-list {
+    margin-top: 20px;
+}
+
+.doctor-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.doctor-image {
+    flex: 0 0 40px;
+}
+
+.doctor-avatar {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+.doctor-info {
+    flex: 1;
+    padding-left: 10px;
+}
+
+.doctor-info p {
+    margin: 0;
+}
+
+.doctor-specialization {
+    font-size: 10px;
+}
+
+.doctor-status {
+    flex: 0 0 60px;
+    text-align: right;
+}
+
+.status-available {
+    color: #43CC3A;
+}
+
+.status-unavailable {
+    color: #CC3A45;
+}

@@ -1,0 +1,92 @@
+/* General Container */
+.appointment-container {
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  margin-top: 100px;
+}
+
+/* Header Styles */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header h5,
+.header h2 {
+  margin: 0;
+}
+
+.see-all {
+  font-weight: bold;
+  color: #007bff;
+  cursor: pointer;
+}
+
+/* Search and Filter */
+.search-filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.search-filter .form-control {
+  width: 60%;
+}
+
+.search-filter .btn {
+  margin-left: 10px;
+}
+
+/* Table Container */
+.appointment-table-container {
+  overflow-x: auto;
+}
+
+.appointment-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.appointment-table th,
+.appointment-table td {
+  border: 1px solid #dee2e6;
+  padding: 8px;
+  text-align: left;
+}
+
+.appointment-table th {
+  background-color: #e9ecef;
+}
+
+.appointment-table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Form Styles */
+.add-appointment-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.add-appointment-container .form-group {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.add-appointment-container .form-control,
+.add-appointment-container .form-select {
+  width: 48%;
+}
+
+.add-appointment-container .terms {
+  display: flex;
+  align-items: center;
+}

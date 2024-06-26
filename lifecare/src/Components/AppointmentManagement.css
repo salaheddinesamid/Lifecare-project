@@ -1,0 +1,63 @@
+.appointment-management {
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .header h5 {
+    margin: 0;
+  }
+  
+  .see-all {
+    font-weight: bold;
+    color: #007bff;
+    cursor: pointer;
+  }
+  
+  .search-filter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .search-filter .form-control {
+    width: 60%;
+  }
+  
+  .search-filter .btn {
+    margin-left: 10px;
+  }
+  
+  .appointment-table-container {
+    overflow-x: auto;
+  }
+  
+  .appointment-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .appointment-table th,
+  .appointment-table td {
+    border: 1px solid #dee2e6;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .appointment-table th {
+    background-color: #e9ecef;
+  }
+  
+  .appointment-table tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  

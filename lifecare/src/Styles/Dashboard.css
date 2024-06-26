@@ -1,3 +1,139 @@
-body{
-    background-color: #333333;
+.dashboard-container {
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar {
+    background-color: #f8f9fa;
+    padding: 15px;
+    height: 100vh;
+    border-right: 1px solid #dee2e6;
+  }
+  
+  .brand-highlight {
+    color: #00FFFF;
+    font-weight: bold;
+  }
+  
+  .service-btn {
+    width: 100%;
+    border: none;
+    background: none;
+    text-align: left;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .service-btn:hover {
+    background-color: #E0FFFF;
+  }
+  
+  .logout-btn {
+    width: 100%;
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .main-content {
+    padding: 20px;
+  }
+  
+  .content-container {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  /* Default (Light) Theme */
+body.light {
+  background-color: #fff;
+  color: #000;
+}
+
+body.light .sidebar {
+  background-color: #f8f9fa;
+  border-right: 1px solid #dee2e6;
+}
+
+body.light .service-btn:hover {
+  background-color: #E0FFFF;
+}
+
+body.light .main-content {
+  background-color: #fff;
+  color: #000;
+}
+
+/* Dark Theme */
+body.dark {
+  background-color: #121212;
+  color: #fff;
+}
+
+body.dark .sidebar {
+  background-color: #1c1c1c;
+  border-right: 1px solid #333;
+}
+
+body.dark .service-btn {
+  color: #fff;
+}
+
+body.dark .service-btn:hover {
+  background-color: #444;
+}
+
+body.dark .main-content {
+  background-color: #1e1e1e;
+  color: #fff;
+}
+
+.dashboard-container {
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar {
+  padding: 15px;
+  height: 100vh;
+}
+
+.brand-highlight {
+  color: #00FFFF;
+  font-weight: bold;
+}
+
+.service-btn {
+  width: 100%;
+  font-weight: bold;
+  border: none;
+  background: none;
+  text-align: left;
+  padding: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.logout-btn {
+  width: 100%;
+  font-size: 1.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-content {
+  padding: 20px;
+}
+
+.content-container {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.theme-toggle-btn {
+  margin-top: 10px;
 }

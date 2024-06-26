@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
+import { icon } from "@fortawesome/fontawesome-svg-core";
 
 export function Card(props){
     const [title,setTitle] = useState(props.title)
-    const [spanName,setSpanName] = useState(props.spanName);
+    const [icon,setIcon] = useState(props.icon);
     const [backgroundColor,setBackgroundColor] = useState(props.backgroundColor);
     const [data,setData] = useState(props.data);
     const url = props.url
@@ -16,9 +17,9 @@ export function Card(props){
             backgroundColor:backgroundColor,
             height:150,
         }}>
-            <div className="row pt-3 d-flex align-items-center">
+            <div className="row pt-3 d-inline-flex align-items-center">
                 <div className="col-xl-2">
-                    <span className="material-symbols-outlined" style={{fontSize:50,color:"black",fontWeight:"bold"}}>{spanName}</span>
+                    {icon}
                 </div>
                 <div className="col-xl-10">
                     <h6 style={{color:"black",fontWeight:"bold"}} className="ps-1">{title}</h6>
