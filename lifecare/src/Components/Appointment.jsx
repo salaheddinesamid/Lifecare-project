@@ -130,9 +130,16 @@ function AddAppointment({ setView, token }) {
       address.trim() !== '' &&
       postalCode.trim() !== '' &&
       disease.trim() !== '' &&
-      dateOfBirth.trim() !== '' &&
+      //dateOfBirth.trim() !== '' &&
       termsChecked
     );
+  };
+
+  const handleDiseaseChange = (e) => {
+    const selectedDisease = e.target.value;
+    setDisease(selectedDisease);
+    const selectedDiseaseObject = diseasesFile.find(d => d.name === selectedDisease);
+    setTotalPrice(selectedDiseaseObject ? selectedDiseaseObject.price : 0);
   };
 
   return (
@@ -163,7 +170,7 @@ function AddAppointment({ setView, token }) {
         <input type="text" placeholder="Postal Code" className="form-control" value={postalCode} onChange={(e) => setPostalCode(e.target.value)} />
       </div>
       <div className="form-group">
-        <select className="form-select" onChange={(e) => setDisease(e.target.value)}>
+        <select className="form-select" onChange={handleDiseaseChange}>
           <option value="">Select Disease</option>
           {diseasesFile.map((disease) => (
             <option key={disease.id} value={disease.name}>{disease.name}</option>
