@@ -1,5 +1,6 @@
 import React from "react";
 import './PatientManagement.css';
+import TuneIcon from '@mui/icons-material/Tune';
 
 export function PatientManagement() {
   const rows = [
@@ -32,7 +33,7 @@ export function PatientManagement() {
           placeholder="Search patients name, id"
         />
         <button className="btn advanced-filter">
-          <span className="material-symbols-outlined">tune</span> Advanced Filter
+          <TuneIcon/>
         </button>
       </div>
       <div className="patient-table">
