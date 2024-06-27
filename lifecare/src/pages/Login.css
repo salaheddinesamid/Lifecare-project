@@ -42,7 +42,8 @@
 }
 
 .logo {
-    height: 200px;
+    width: 120px; /* Adjust the width as per your requirement */
+    height: 120px; /* Adjust the height as per your requirement */
 }
 
 .right-panel {
@@ -126,3 +127,34 @@
     border-radius: 5px;
     cursor: pointer;
 }
+@keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .spiral-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+  }
+  
+  .spiral {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2000px;
+    height: 2000px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    animation: spin 60s linear infinite;
+    transform-origin: center;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+  }
+  

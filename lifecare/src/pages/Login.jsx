@@ -31,6 +31,12 @@ export function Login() {
 
     return (
         <div className="login-container">
+            {/* Spiral Background */}
+            <div className="spiral-background">
+                <div className="spiral"></div>
+            </div>
+
+            {/* Rest of the Login UI */}
             <div className="left-panel">
                 <div className="branding">
                     <h3 className="brand-title">
@@ -39,7 +45,7 @@ export function Login() {
                     </h3>
                 </div>
                 <div className="logo-container">
-                    <img src={logo} alt="Life Care Logo" className="logo" />
+                    <img src={logo} alt="Life Care Logo" style={{height:"200px"}} />
                 </div>
             </div>
             <div className="right-panel">
@@ -49,9 +55,8 @@ export function Login() {
                         <HealingIcon/>
                     </h3>
                     <div className="form-group">
-                        
                         <input
-                            type="text"
+                            type="email"
                             className="form-control"
                             id="email"
                             value={email}
