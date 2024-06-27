@@ -1,64 +1,140 @@
-import React, { useState } from "react";
-import "./Patient.css";
+// Patient.js
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import './Patient.css';
 
-export function Patient({ darkMode }) {
-    // Define CSS variables for light and dark modes
-    const lightMode = {
-        backgroundColor: "#FFFFFF",
-        textColor: "#000000",
-        accentColor: "#59C9A5",
-    };
+export function Patient(){
+  const [patients, setPatients] = useState([]);
+  const [form, setForm] = useState({ fullname: '', nationalid: '', age: '', address: '', country: '', email: '', status: 'active' });
+  const [editId, setEditId] = useState(null);
+  const [message, setMessage] = useState('');
 
-    const darkModeStyles = {
-        backgroundColor: "#1E1E1E",
-        textColor: "#FFFFFF",
-        accentColor: "red",
-    };
+  useEffect(() => {
+    // Fetch patients data from the server
+    axios.get('/api/patients')
+      .then(response => setPatients(response.data))
+      .catch(error => console.error(error));
+  }, []);
 
-    const currentMode = darkMode ? darkModeStyles : lightMode;
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+  };
 
-    return (
-        <div className="row patient-number-container" style={{ backgroundColor: currentMode.backgroundColor, color: currentMode.textColor }}>
-            <div className="row pt-3 pb-2">
-                <div className="col-xl-9">
-                    <h5 style={{ fontWeight: "bold" }}>Patient</h5>
-                </div>
-                <div className="col-xl-3">
-                    <select name="" id="" className="form-select" style={{ backgroundColor: "transparent" }}></select>
-                </div>
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (editId) {
+      // Update patient
+      axios.put(`/api/patients/${editId}`, form)
+        .then(response => {
+          setPatients(patients.map(item => (item.id === editId ? response.data : item)));
+          setEditId(null);
+          setForm({ fullname: '', nationalid: '', age: '', address: '', country: '', email: '', status: 'active' });
+          setMessage('Patient updated successfully');
+          setTimeout(() => setMessage(''), 3000);
+        })
+        .catch(error => console.error(error));
+    } else {
+      // Add new patient
+      axios.post('http://localhost:8080/patient-management/new_patient', form)
+        .then(response => {
+          setPatients([...patients, response.data]);
+          setForm({ fullname: '', nationalid: '', age: '', address: '', country: '', email: '', status: 'active' });
+          setMessage('Patient added successfully');
+          setTimeout(() => setMessage(''), 3000);
+        })
+        .catch(error => console.error(error));
+    }
+  };
+
+  const handleEdit = (id) => {
+    const patient = patients.find(item => item.id === id);
+    setForm({ fullname: patient.fullname, nationalid: patient.nationalid, age: patient.age, address: patient.address, country: patient.country, email: patient.email, status: patient.status });
+    setEditId(id);
+  };
+
+  const handleDelete = (id) => {
+    axios.delete(`/api/patients/${id}`)
+      .then(() => {
+        setPatients(patients.filter(item => item.id !== id));
+        setMessage('Patient deleted successfully');
+        setTimeout(() => setMessage(''), 3000);
+      })
+      .catch(error => console.error(error));
+  };
+
+  return (
+    <div className="patient-management">
+      <h1>Patient Management</h1>
+      {message && <div className="message">{message}</div>}
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="fullname"
+          value={form.fullname}
+          onChange={handleChange}
+          placeholder="Full Name"
+          required
+        />
+        <input
+          type="text"
+          name="nationalid"
+          value={form.nationalid}
+          onChange={handleChange}
+          placeholder="National ID"
+          required
+        />
+        <input
+          type="number"
+          name="age"
+          value={form.age}
+          onChange={handleChange}
+          placeholder="Age"
+          required
+        />
+        <input
+          type="text"
+          name="address"
+          value={form.address}
+          onChange={handleChange}
+          placeholder="Address"
+          required
+        />
+        <input
+          type="text"
+          name="country"
+          value={form.country}
+          onChange={handleChange}
+          placeholder="Country"
+          required
+        />
+        <input
+          type="email"
+          name="email"
+          value={form.email}
+          onChange={handleChange}
+          placeholder="Email"
+          required
+        />
+        <select name="status" value={form.status} onChange={handleChange}>
+          <option value="active">Active</option>
+          <option value="inactive">Inactive</option>
+        </select>
+        <button type="submit">{editId ? 'Update' : 'Add'}</button>
+      </form>
+      <ul>
+        {patients.map(item => (
+          <li key={item.id}>
+            {item.fullname} - {item.nationalid} - {item.age} - {item.address} - {item.country} - {item.email} ({item.status})
+            <div>
+              <button className="edit-button" onClick={() => handleEdit(item.id)}>Edit</button>
+              <button onClick={() => handleDelete(item.id)}>Delete</button>
             </div>
-            <div className="row">
-                <div className="col-xl-6">
-                    <div className="row">
-                        <div className="col-xl-6">
-                            <span className="material-symbols-outlined" style={{ backgroundColor: currentMode.accentColor, padding: "10px 10px", borderRadius: 100 }}>person_apron</span>
-                        </div>
-                        <div className="col-xl-6">
-                            <div className="row">
-                                <p style={{ fontWeight: "bold" }}>200</p>
-                            </div>
-                            <div className="row">
-                                <p style={{ fontSize: 10 }}>New patient</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-xl-6">
-                    <div className="row">
-                        <div className="col-xl-6">
-                            <span className="material-symbols-outlined" style={{ backgroundColor: currentMode.accentColor, padding: "10px 10px", borderRadius: 100 }}>person_apron</span>
-                        </div>
-                        <div className="col-xl-6">
-                            <div className="row">
-                                <p style={{ fontWeight: "bold" }}>200</p>
-                            </div>
-                            <div className="row">
-                                <p style={{ fontSize: 10 }}>Old patient</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default Patient;

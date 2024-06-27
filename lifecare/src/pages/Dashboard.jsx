@@ -3,8 +3,12 @@ import "../Styles/Dashboard.css";
 import { useNavigate } from "react-router-dom";
 import { Dash } from "../Components/Dash";
 import { Header } from "../Components/Header";
+import StaffManagement from "../Components/StaffManagement";
 import { Appointment } from "../Components/Appointment";
 import LogoutIcon from '@mui/icons-material/Logout';
+import Analytics from "../Components/Analytics";
+import {Help} from "../Components/Help";
+import {Patient} from "../Components/Patient";
 
 export function Dashboard({ toggleMode }) {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
@@ -17,11 +21,11 @@ export function Dashboard({ toggleMode }) {
   const services = [
     { id: 1, name: "Dashboard", View: <Dash /> },
     { id: 2, name: "Appointments", View: <Appointment /> },
-    { id: 3, name: "Patient" },
-    { id: 4, name: "Departments" },
-    { id: 5, name: "Analytics" },
+    { id: 3, name: "Patient", View:<Patient/> },
+    { id: 4, name: "Staff Management", View:<StaffManagement/> },
+    { id: 5, name: "Analytics", View:<Analytics/> },
     { id: 6, name: "Financial" },
-    { id: 7, name: "Help" },
+    { id: 7, name: "Help",View:<Help/> },
     { id: 8, name: "Settings" }
   ];
 

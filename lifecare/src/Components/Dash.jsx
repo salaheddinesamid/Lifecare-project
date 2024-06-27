@@ -1,7 +1,6 @@
 import React from "react";
 import { Card } from "./Card";
 import { PatientManagement } from "./PatientManagement";
-import { Patient } from "./Patient";
 import { Doctor } from "./Doctors";
 import VaccinesIcon from '@mui/icons-material/Vaccines';
 import DateRangeIcon from '@mui/icons-material/DateRange';
@@ -58,7 +57,6 @@ export function Dash() {
           <PatientManagement />
         </div>
         <div className="col-xl-4">
-          <Patient />
           <Doctor />
         </div>
       </div>

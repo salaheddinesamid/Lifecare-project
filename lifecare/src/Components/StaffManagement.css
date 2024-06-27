@@ -1,6 +1,5 @@
-/* Patient.css */
-
-.patient-management {
+/* Container */
+.staff-management {
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
@@ -8,59 +7,46 @@
     margin: 20px;
   }
   
-  .patient-management h1 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .patient-management .message {
-    text-align: center;
-    padding: 10px;
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-    border-radius: 4px;
-    margin-bottom: 20px;
-  }
-  
-  .patient-management form {
+  /* Form */
+  .staff-management form {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
   }
   
-  .patient-management form input,
-  .patient-management form select,
-  .patient-management form button {
+  .staff-management form input,
+  .staff-management form select,
+  .staff-management form button {
     padding: 10px;
     margin: 5px 0;
     border: 1px solid #ccc;
     border-radius: 4px;
   }
   
-  .patient-management form button {
+  .staff-management form button {
     background-color: #007bff;
     color: white;
     cursor: pointer;
   }
   
-  .patient-management form button:hover {
+  .staff-management form button:hover {
     background-color: #0056b3;
   }
   
-  .patient-management ul {
+  /* Staff List */
+  .staff-management ul {
     list-style-type: none;
     padding: 0;
   }
   
-  .patient-management ul li {
+  .staff-management ul li {
     display: flex;
     justify-content: space-between;
     padding: 10px;
     border-bottom: 1px solid #ddd;
   }
   
-  .patient-management ul li button {
+  .staff-management ul li button {
     background-color: #dc3545;
     color: white;
     border: none;
@@ -69,15 +55,15 @@
     cursor: pointer;
   }
   
-  .patient-management ul li button:hover {
+  .staff-management ul li button:hover {
     background-color: #c82333;
   }
   
-  .patient-management ul li .edit-button {
+  .staff-management ul li .edit-button {
     background-color: #28a745;
   }
   
-  .patient-management ul li .edit-button:hover {
+  .staff-management ul li .edit-button:hover {
     background-color: #218838;
   }
   

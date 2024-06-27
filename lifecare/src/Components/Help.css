@@ -1,0 +1,53 @@
+/* Help.css */
+
+.help {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+  }
+  
+  .help h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .faq {
+    margin-bottom: 40px;
+  }
+  
+  .faq h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .faq .question {
+    margin-bottom: 20px;
+  }
+  
+  .faq .question h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+  }
+  
+  .faq .question p {
+    font-size: 1em;
+    margin: 0;
+  }
+  
+  .contact-info h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .contact-info ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .contact-info ul li {
+    font-size: 1em;
+    margin-bottom: 10px;
+  }
+  
