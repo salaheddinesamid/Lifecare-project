@@ -51,7 +51,7 @@ const StaffManagement = () => {
   };
 
   const handleDelete = (id) => {
-    axios.delete(`/api/staff/${id}`)
+    axios.delete(`http://localhost:8080/staff-management/delete/${id}`)
       .then(() => setStaff(staff.filter(item => item.id !== id)))
       .catch(error => console.error(error));
   };
