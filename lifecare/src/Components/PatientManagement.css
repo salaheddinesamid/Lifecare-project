@@ -1,73 +1,67 @@
+/* src/components/PatientManagement.css */
+
 .patient-management-container {
-    padding: 20px;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    color: black;
-  }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .header h5 {
-    margin: 0;
-  }
-  
-  .see-all {
-    color: #007bff;
-    cursor: pointer;
-  }
-  
-  .search-filter {
-    display: flex;
-    justify-content: space-between;
-    margin: 20px 0;
-  }
-  
-  .search-input {
-    flex: 1;
-    margin-right: 10px;
-  }
-  
-  .advanced-filter {
-    background-color: #007bff;
-    color: black;
-  }
-  
-  .patient-table {
-    overflow-x: auto;
-  }
-  
-  .patient-table table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .patient-table th, .patient-table td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #dee2e6;
-  }
-  
-  .patient-table th {
-    background-color: #f1f1f1;
-  }
-  
-  .status-discharge {
-    color: #cc3a45;
-  }
-  
-  .status-admitted {
-    color: #28a745;
-  }
-  
-  .partient-number-container{
-    padding: 20px;
-    background-color: #dee2e6;
-    border-radius: 8px;
-    color: black;
-    overflow-x: auto;
-    border-collapse: collapse;
-  }
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header h5 {
+  font-size: 24px;
+  color: #4CAF50;
+}
+
+.see-all {
+  cursor: pointer;
+  color: #007bff;
+}
+
+.search-filter {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.search-input {
+  flex: 1;
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.advanced-filter {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.patient-table {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.patient-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.patient-table th, .patient-table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.patient-table th {
+  background-color: #f2f2f2;
+}

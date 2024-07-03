@@ -1,83 +1,53 @@
-/* Patient.css */
+/* src/components/Patient.css */
 
-.patient-management {
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin: 20px;
-  }
-  
-  .patient-management h1 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .patient-management .message {
-    text-align: center;
-    padding: 10px;
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-    border-radius: 4px;
-    margin-bottom: 20px;
-  }
-  
-  .patient-management form {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-  }
-  
-  .patient-management form input,
-  .patient-management form select,
-  .patient-management form button {
-    padding: 10px;
-    margin: 5px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .patient-management form button {
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-  }
-  
-  .patient-management form button:hover {
-    background-color: #0056b3;
-  }
-  
-  .patient-management ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .patient-management ul li {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .patient-management ul li button {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .patient-management ul li button:hover {
-    background-color: #c82333;
-  }
-  
-  .patient-management ul li .edit-button {
-    background-color: #28a745;
-  }
-  
-  .patient-management ul li .edit-button:hover {
-    background-color: #218838;
-  }
-  
+.patient-container {
+  padding: 20px;
+  max-width: 600px;
+  margin: auto;
+}
+
+.patient-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #4CAF50;
+}
+
+.patient-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.patient-list li {
+  background-color: #f9f9f9;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.patient-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.patient-form input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.patient-form button {
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.patient-form button:hover {
+  background-color: #45a049;
+}

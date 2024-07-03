@@ -26,7 +26,7 @@ const StaffManagement = () => {
     e.preventDefault();
     if (editId) {
       // Update staff
-      axios.put(`/api/staff/${editId}`, form)
+      axios.put(`http://localhost:8080/staff-management/edit/${editId}`, form)
         .then(response => {
           setStaff(staff.map(item => (item.id === editId ? response.data : item)));
           setEditId(null);

@@ -1,11 +1,13 @@
 import React from "react";
 import { Card } from "./Card";
 import { PatientManagement } from "./PatientManagement";
-import { Doctor } from "./Doctors";
+import { Doctors } from "./Doctors"; // Updated import for Doctor component
 import VaccinesIcon from '@mui/icons-material/Vaccines';
 import DateRangeIcon from '@mui/icons-material/DateRange';
 import AirlineSeatIndividualSuiteIcon from '@mui/icons-material/AirlineSeatIndividualSuite';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import { Nurse } from "./Nurse";
+import { History } from "./History";
 
 export function Dash() {
   const cards = [
@@ -53,11 +55,16 @@ export function Dash() {
         ))}
       </div>
       <div className="row mt-4" style={{ justifyContent: "space-between" }}>
-        <div className="col-xl-7 me-1">
-          <PatientManagement />
+        <div className="col-xl-12 me-1 mt-2 mb-3">
+          <History/>
         </div>
-        <div className="col-xl-4">
-          <Doctor />
+      </div>
+      <div className="row">
+        <div className="col-xl-12 mt-2 mb-3">
+          <Nurse/>
+        </div>
+        <div className="col-xl-12 mt-2 mb-3">
+          <Doctors />
         </div>
       </div>
     </div>

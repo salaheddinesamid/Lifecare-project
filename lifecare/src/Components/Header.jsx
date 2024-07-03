@@ -8,7 +8,7 @@ import axios from "axios";
 
 export function Header({ toggleMode }) {
   const token = localStorage.getItem('accessToken');
-  const [adminName,setAdminName] = useState("")
+  const [adminName,setAdminName] = useState("");
   useEffect(()=>{
     axios.get("http://localhost:8080/admin/getadmin", {
       headers: { "Authorization": `Bearer ${token}` }

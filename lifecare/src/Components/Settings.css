@@ -1,0 +1,59 @@
+/* AdminSettings.css */
+
+.admin-settings {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+  }
+  
+  .admin-settings h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .admin-settings .message {
+    text-align: center;
+    padding: 10px;
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+  
+  .admin-settings form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .admin-settings .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .admin-settings .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .admin-settings .form-group input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+  }
+  
+  .admin-settings button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .admin-settings button:hover {
+    background-color: #0056b3;
+  }
+  

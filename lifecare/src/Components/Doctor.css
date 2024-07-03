@@ -1,68 +1,79 @@
+/* Doctor List Container */
 .doctor-container {
-    padding: 20px;
     background-color: #f8f9fa;
     border-radius: 8px;
-    color: black;
-}
-
-.doctor-header {
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Doctor List Header */
+  .doctor-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.doctor-title h5 {
+    margin-bottom: 20px;
+  }
+  
+  .doctor-title h5 {
     margin: 0;
-}
-
-.doctor-see-all p {
-    font-weight: bold;
-    color: #00FFFF;
+  }
+  
+  .doctor-see-all {
     cursor: pointer;
-}
-
-.doctor-list {
-    margin-top: 20px;
-}
-
-.doctor-item {
+    color: #007bff;
+  }
+  
+  /* Doctor List */
+  .doctor-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  
+  /* Doctor Item */
+  .doctor-item {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 10px;
+    width: 400px;
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
-}
-
-.doctor-image {
-    flex: 0 0 40px;
-}
-
-.doctor-avatar {
-    height: 40px;
-    width: 40px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .doctor-image {
+    flex: 0 0 70px;
+    margin-right: 10px;
+    
+  }
+  
+  .doctor-avatar {
+    width: 100%;
     border-radius: 50%;
-}
-
-.doctor-info {
-    flex: 1;
-    padding-left: 10px;
-}
-
-.doctor-info p {
-    margin: 0;
-}
-
-.doctor-specialization {
-    font-size: 10px;
-}
-
-.doctor-status {
-    flex: 0 0 60px;
-    text-align: right;
-}
-
-.status-available {
-    color: #43CC3A;
-}
-
-.status-unavailable {
-    color: #CC3A45;
-}
+    width: 70px;
+    height: 70px;
+  }
+  
+  .doctor-info {
+    flex-grow: 1;
+  }
+  
+  .doctor-specialization {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-top: 5px;
+  }
+  
+  .doctor-status {
+    flex: 0 0 80px;
+    text-align: center;
+  }
+  
+  .status-available {
+    color: #28a745;
+  }
+  
+  .status-unavailable {
+    color: #dc3545;
+  }
+  

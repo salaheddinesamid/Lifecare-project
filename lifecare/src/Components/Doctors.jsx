@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import maleDoc from "./doctor_char_male.jpg";
 import femaleDoc from "./doctor_char_female.jpg";
-import './Doctor.css'; // Create and import a CSS file
+import './Doctor.css'; // Import CSS file
 
-export function Doctor() {
+export function Doctors() {
     const [doctors, setDoctors] = useState([]);
     const token = localStorage.getItem('accessToken');
 
@@ -34,7 +34,7 @@ export function Doctor() {
             </div>
             <div className="doctor-list">
                 {doctors.map((doctor) => (
-                    <div className="doctor-item" key={doctor.id}>
+                    <div className="doctor-item col-xl-12" key={doctor.id}>
                         <div className="doctor-image">
                             <img src={doctor.gender === "Male" ? maleDoc : femaleDoc} alt="" className="doctor-avatar" />
                         </div>

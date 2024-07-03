@@ -1,39 +1,47 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import './PatientManagement.css';
 import TuneIcon from '@mui/icons-material/Tune';
 
 export function PatientManagement() {
-  const rows = [
-    {
-      id: "#124",
-      Name: "Kath Murphy",
-      Admit: "9/12/24",
-      Type: "Diabetes",
-      Status: "Discharge",
-    },
-    {
-      id: "#125",
-      Name: "John Doe",
-      Admit: "10/12/24",
-      Type: "Hypertension",
-      Status: "Admitted",
+  const [patients, setPatients] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    axios.get('http://localhost:8080/patient-management/get_all')
+      .then(response => {
+        setPatients(response.data);
+      })
+      .catch(error => {
+        console.error("There was an error fetching the patients!", error);
+      });
+  }, []);
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const filteredPatients = patients.filter(patient => {
+    if (searchTerm && patient.fullName && patient.id) {
+      return (
+        patient.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        patient.id.toString().includes(searchTerm)
+      );
     }
-    // Add more rows as needed
-  ];
+    return true; // Return true to include all patients if searchTerm or patient.fullName/id is null/undefined
+  });
 
   return (
     <div className="patient-management-container">
-      <div className="header">
-        <h5>Patients Management</h5>
-        <p className="see-all">See all</p>
-      </div>
       <div className="search-filter">
         <input
           className="form-control search-input"
           placeholder="Search patients name, id"
+          value={searchTerm}
+          onChange={handleSearchChange}
         />
         <button className="btn advanced-filter">
-          <TuneIcon/>
+          <TuneIcon />
         </button>
       </div>
       <div className="patient-table">
@@ -41,22 +49,24 @@ export function PatientManagement() {
           <thead>
             <tr>
               <th>ID</th>
-              <th>Name</th>
-              <th>Type</th>
-              <th>Status</th>
-              <th>Admit</th>
+              <th>Full Name</th>
+              <th>National ID</th>
+              <th>Age</th>
+              <th>Address</th>
+              <th>Country</th>
+              <th>Email</th>
             </tr>
           </thead>
           <tbody>
-            {rows.map((row) => (
-              <tr key={row.id}>
-                <td>{row.id}</td>
-                <td>{row.Name}</td>
-                <td>{row.Type}</td>
-                <td className={row.Status === "Discharge" ? "status-discharge" : "status-admitted"}>
-                  {row.Status}
-                </td>
-                <td>{row.Admit}</td>
+            {filteredPatients.map((patient) => (
+              <tr key={patient.id}>
+                <td>{patient.id}</td>
+                <td>{patient.fullName}</td>
+                <td>{patient.nationalId}</td>
+                <td>{patient.age}</td>
+                <td>{patient.address}</td>
+                <td>{patient.country}</td>
+                <td>{patient.email}</td>
               </tr>
             ))}
           </tbody>

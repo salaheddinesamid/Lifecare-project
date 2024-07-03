@@ -43,9 +43,6 @@ export function Appointment() {
 
   return (
     <div className="appointment-container">
-      <div className="header">
-        <h2>Hospital Appointment Management</h2>
-      </div>
       <div className="tabs">
         {components.map((component) => (
           <button key={component.id} className={`tab-button ${view === component.id ? 'active' : ''}`} onClick={() => setView(component.id)}>
@@ -144,9 +141,6 @@ function AddAppointment({ setView, token }) {
 
   return (
     <div className="add-appointment-container">
-      <div className="header">
-        <h2>Request Appointment</h2>
-      </div>
       <div className="form-group">
         <input type="text" placeholder="Full Name" className="form-control" value={patient} onChange={(e) => setPatient(e.target.value)} />
         <input type="text" placeholder="ID Number" className="form-control" value={idNumber} onChange={(e) => setIdNumber(e.target.value)} />
@@ -193,10 +187,6 @@ function AddAppointment({ setView, token }) {
 function AppointmentManagement({ appointments }) {
   return (
     <div className="appointment-management">
-      <div className="header">
-        <h5>Appointments</h5>
-        <p className="see-all">See All</p>
-      </div>
       <div className="appointment-table-container">
         <table className="appointment-table">
           <thead>
