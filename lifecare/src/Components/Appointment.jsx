@@ -5,6 +5,7 @@ import diseasesFile from "./diagnosis.json";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./Appointment.css";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export function Appointment() {
   const [listOfDoctors, setListOfDoctors] = useState([]);
@@ -185,6 +186,11 @@ function AddAppointment({ setView, token }) {
 }
 
 function AppointmentManagement({ appointments }) {
+  const navigate = useNavigate();
+  function naviagteAppointment(appointment){
+    localStorage.setItem("target_appointment",JSON.stringify(appointment))
+    navigate("/appointment/details")
+  }
   return (
     <div className="appointment-management">
       <div className="appointment-table-container">
@@ -200,7 +206,7 @@ function AppointmentManagement({ appointments }) {
           </thead>
           <tbody>
             {appointments.map((appointment) => (
-              <tr key={appointment.id}>
+              <tr key={appointment.id} onClick={()=>naviagteAppointment(appointment)}>
                 <td>{appointment.patient}</td>
                 <td>{appointment.idNumber}</td>
                 <td>{appointment.address}</td>

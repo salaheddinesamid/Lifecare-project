@@ -1,38 +1,48 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
-import { icon } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import './Card.css';
 
-export function Card(props){
-    const [title,setTitle] = useState(props.title)
-    const [icon,setIcon] = useState(props.icon);
-    const [backgroundColor,setBackgroundColor] = useState(props.backgroundColor);
-    const [data,setData] = useState(props.data);
-    const url = props.url
-    useEffect(()=>{
-        axios.get(`http://localhost:8080/analytics/${url}`).then(res=>setData(res.data))
-    })
-    return(
-        <div className="col-xl-11" style={{
-            borderRadius:10,
-            backgroundColor:backgroundColor,
-            height:150,
-        }}>
-            <div className="row pt-3 d-inline-flex align-items-center">
-                <div className="col-xl-2">
-                    {icon}
+export function Card(props) {
+    const [title, setTitle] = useState(props.title);
+    const [icon, setIcon] = useState(props.icon);
+    const [backgroundColor, setBackgroundColor] = useState(props.backgroundColor);
+    const [data, setData] = useState(props.data);
+    const [additionalInfo, setAdditionalInfo] = useState(props.additionalInfo);
+    const url = props.url;
+
+    useEffect(() => {
+        axios.get(`http://localhost:8080/analytics/${url}`)
+            .then(res => {
+                setData(res.data);
+                setAdditionalInfo(res.data.additional);
+            })
+            .catch(err => console.error(err));
+    }, [url]);
+
+    return (
+        <div className="card-container" style={{ backgroundColor: backgroundColor }}>
+            <div className="card-header">
+                <div className="card-icon">
+                    <FontAwesomeIcon icon={icon} />
                 </div>
-                <div className="col-xl-10">
-                    <h6 style={{color:"black",fontWeight:"bold"}} className="ps-1">{title}</h6>
+                <div className="card-title">
+                    <h6>{title}</h6>
                 </div>
             </div>
-            <div className="row d-flex align-items-end">
-                <div className="col-xl-6">
-                    <h3 style={{fontWeight:"bold"}}>{data}</h3>
+            <div className="card-body">
+                <div className="card-data">
+                    <h3>{data}</h3>
                 </div>
-                <div className="col-xl-6">
-
+                <div className="card-additional-info">
+                    {additionalInfo && additionalInfo.map((info, index) => (
+                        <div key={index} className="info-item">
+                            <FontAwesomeIcon icon={info.icon} className="info-icon" />
+                            <span>{info.text}</span>
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>
-    )
+    );
 }

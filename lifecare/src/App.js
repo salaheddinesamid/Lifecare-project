@@ -1,7 +1,3 @@
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
@@ -10,6 +6,8 @@ import "bootstrap/dist/css/bootstrap.css"
 import "bootstrap/dist/js/bootstrap.js"
 import { Dashboard } from './pages/Dashboard';
 import { useEffect, useState } from 'react';
+import { AppointmentDetails } from './Components/AppointmentDetails';
+import { Home } from './pages/Home';
 
 function App() {
   const [mode, setMode] = useState(localStorage.getItem("mode") || "light");
@@ -26,8 +24,10 @@ function App() {
     <div className="App" style={{height: "850px",width:"100%", backgroundColor: mode === "light" ? "white" : "#000000" ,color: mode === "light" ? "#000000" : "white" }}>
       <BrowserRouter>
         <Routes>
-          <Route path='' element={<Login />} />
-          <Route path='/dashboard' element={<Dashboard toggleMode={toggleMode} />} />
+          <Route path='overview' element={<Home />} />
+          <Route path='reception/login' element={<Login />} />
+          <Route path='reception/dashboard' element={<Dashboard toggleMode={toggleMode} />} />
+          <Route path='/appointment/details' element={<AppointmentDetails />} />
         </Routes>
       </BrowserRouter>
     </div>

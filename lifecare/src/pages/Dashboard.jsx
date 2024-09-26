@@ -36,11 +36,14 @@ export function Dashboard() {
     { id: 2, name: "Appointments", View: <Appointment /> },
     { id: 3, name: "Patients", View: <PatientManagement /> },
     { id: 4, name: "Staff Management", View: <StaffManagement /> },
-    { id: 5, name: "Analytics", View: <Analytics /> },
-    { id: 6, name: "Nurse", View: <Nurse /> }, // Add Nurse component
-    { id: 7, name: "History", View: <History /> }, // Add History component
-    { id: 8, name: "Help", View: <Help /> },
-    { id: 9, name: "Settings", View: <Settings /> }
+    { id : 5, name: "Medical Records"},
+    { id : 6, name: "Billing & Invoices"},
+    { id : 6, name: "Rooms & Beds"},
+    { id: 7, name: "Analytics", View: <Analytics /> },
+    { id: 8, name: "Nurse", View: <Nurse /> }, // Add Nurse component
+    { id: 9, name: "History", View: <History /> }, // Add History component
+    { id: 10, name: "Help", View: <Help /> },
+    { id: 11, name: "Settings", View: <Settings /> }
   ];
 
   const handleMouseEnter = (e) => {

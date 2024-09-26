@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import './History.css'; // Import a CSS file for styling
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 export function History() {
   const [history, setHistory] = useState([]);
 
   useEffect(() => {
+    fetchHistory();
+  }, []);
+
+  const fetchHistory = () => {
     const token = localStorage.getItem('accessToken');
     if (token) {
       axios.get('http://localhost:8080/history', {
@@ -18,7 +24,22 @@ export function History() {
         console.error("Error fetching history:", error);
       });
     }
-  }, []);
+  };
+
+  const deleteRecord = (id) => {
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+      axios.delete(`http://localhost:8080/history/${id}`, {
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
+      }).then(() => {
+        setHistory(history.filter(record => record.id !== id));
+      }).catch((error) => {
+        console.error("Error deleting record:", error);
+      });
+    }
+  };
 
   return (
     <div className="history-container">
@@ -33,6 +54,7 @@ export function History() {
               <th>Action</th>
               <th>User</th>
               <th>Timestamp</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -42,6 +64,11 @@ export function History() {
                 <td>{record.description}</td>
                 <td>{record.user}</td>
                 <td>{new Date(record.timestamp).toLocaleString()}</td>
+                <td>
+                  <button className="delete-button" onClick={() => deleteRecord(record.id)}>
+                    <FontAwesomeIcon icon={faTrashAlt} />
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
