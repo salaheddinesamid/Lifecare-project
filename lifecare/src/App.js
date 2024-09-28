@@ -14,6 +14,7 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("mode", mode);
+    localStorage.setItem("view","home page");
   }, [mode]);
 
   const toggleMode = () => {
@@ -24,7 +25,7 @@ function App() {
     <div className="App" style={{height: "850px",width:"100%", backgroundColor: mode === "light" ? "white" : "#000000" ,color: mode === "light" ? "#000000" : "white" }}>
       <BrowserRouter>
         <Routes>
-          <Route path='overview' element={<Home />} />
+          <Route path='' element={<Home />} />
           <Route path='reception/login' element={<Login />} />
           <Route path='reception/dashboard' element={<Dashboard toggleMode={toggleMode} />} />
           <Route path='/appointment/details' element={<AppointmentDetails />} />

@@ -44,9 +44,12 @@ export function Appointment() {
 
   return (
     <div className="appointment-container">
-      <div className="tabs">
+      <div className="tabs mt-3 mb-4 ">
         {components.map((component) => (
-          <button key={component.id} className={`tab-button ${view === component.id ? 'active' : ''}`} onClick={() => setView(component.id)}>
+          <button key={component.id} className="btn ms-3 me-3" style={{
+            backgroundColor:"#22d3ee",
+            color:"black"
+          }} onClick={() => setView(component.id)}>
             {component.name}
           </button>
         ))}
