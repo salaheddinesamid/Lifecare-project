@@ -8,7 +8,7 @@ export function PatientManagement() {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    axios.get('http://localhost:8080/patient-management/get_all')
+    axios.get('http://localhost:8080/api/patient/get_all')
       .then(response => {
         setPatients(response.data);
       })

@@ -56,43 +56,47 @@ const StaffManagement = () => {
       .catch(error => console.error(error));
   };
 
-  return (
-    <div className="staff-management">
-      <h1>Staff Management</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="fullName"
-          value={form.fullName}
-          onChange={handleChange}
-          placeholder="Name"
-          required
-        />
-        <input
-          type="text"
-          name="role"
-          value={form.role}
-          onChange={handleChange}
-          placeholder="Role"
-          required
-        />
-        <select name="status" value={form.status} onChange={handleChange}>
-          <option value="active">Active</option>
-          <option value="inactive">Inactive</option>
-        </select>
-        <button type="submit">{editId ? 'Update' : 'Add'}</button>
-      </form>
-      <ul>
-        {staff.map(item => (
-          <li key={item.id}>
-            {item.fullName} - {item.role} ({item.status})
-            <div>
-              <button className="edit-button" onClick={() => handleEdit(item.id)}><EditIcon/></button>
-              <button onClick={() => handleDelete(item.id)}><DeleteForeverIcon/></button>
+  const DoctorSection = () =>{
+    const [doctors,setDoctors] = useState([]);
+    useEffect(()=>{
+      try{
+        let request = axios.get("http://localhost:8080/api/doctor/")
+        .then((res)=>{
+          console.log("Fetch doctor data...");
+          setDoctors(res.data);
+        })
+      }
+      catch(err){
+        console.log(err);
+      }
+    },[])
+    return(
+      <div className="row">
+        <h2>Doctors</h2>
+        {
+          doctors.map((doctor)=>(
+            <div className="col staff">
+              <p>Mr, <b>{doctor.fullName}</b></p>
+              <p>Professional ID: <b>{doctor.professionalId}</b></p>
             </div>
-          </li>
-        ))}
-      </ul>
+          ))
+        }
+      </div>
+    )
+  }
+
+  const NurseSection = () =>{
+    return(
+      <div className="row">
+        
+      </div>
+    )
+  }
+
+  return (
+    <div className="row">
+      <h1 className='text-center'>Staff Management</h1>
+      <DoctorSection/>
     </div>
   );
 };

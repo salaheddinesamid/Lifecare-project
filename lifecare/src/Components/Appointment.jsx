@@ -22,7 +22,7 @@ export function Appointment() {
   }, [token]);
 
   useEffect(() => {
-    axios.get("http://localhost:8080/appointments/", {
+    axios.get("http://localhost:8080/api/appointment/get_all", {
       headers: { "Authorization": `Bearer ${token}` }
     })
       .then(res => setAppointments(res.data))
@@ -194,10 +194,20 @@ function AppointmentManagement({ appointments }) {
     localStorage.setItem("target_appointment",JSON.stringify(appointment))
     navigate("/appointment/details")
   }
+
+  const NoDataAvailableException = () =>{
+    return(
+      <div className="row">
+        <h2 className="text-danger">No data available</h2>
+      </div>
+    )
+  }
   return (
     <div className="appointment-management">
       <div className="appointment-table-container">
-        <table className="appointment-table">
+        {
+          appointments && appointments.length !== 0? 
+          <table className="appointment-table">
           <thead>
             <tr>
               <th>Name</th>
@@ -218,7 +228,9 @@ function AppointmentManagement({ appointments }) {
               </tr>
             ))}
           </tbody>
-        </table>
+        </table> 
+        : <NoDataAvailableException/>
+        }
       </div>
     </div>
   );

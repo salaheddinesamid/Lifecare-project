@@ -65,7 +65,7 @@ export function Dashboard() {
   );
 
   const token = localStorage.getItem('accessToken');
-  if (token !== "null") return <Error />;
+  //if (token !== "null") return <Error />;
 
   return (
     <div className="dashboard-container" style={{ display: 'flex', backgroundColor: '#f5f7fa' }}>
