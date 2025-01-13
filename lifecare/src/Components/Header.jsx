@@ -3,7 +3,8 @@ import "../Styles/Header.css";
 import logo from "../doctor.png";
 import MarkEmailUnreadIcon from '@mui/icons-material/MarkEmailUnread';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import ContrastIcon from '@mui/icons-material/Contrast';
+//import ContrastIcon from '@mui/icons-material/Contrast';
+import ChatIcon from '@mui/icons-material/Chat';
 import axios from "axios";
 
 export function Header({ toggleMode }) {
@@ -27,7 +28,7 @@ export function Header({ toggleMode }) {
       <div className="header-right">
         <button className="icon-btn"><MarkEmailUnreadIcon /></button>
         <button className="icon-btn"><NotificationsIcon /></button>
-        <button className="icon-btn" onClick={toggleMode}><ContrastIcon /></button>
+        <button className="icon-btn"><ChatIcon/></button>
       </div>
     </div>
   );
