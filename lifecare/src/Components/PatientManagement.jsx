@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import './PatientManagement.css';
+import '../Styles/PatientManagement.css';
 import TuneIcon from '@mui/icons-material/Tune';
 
 export function PatientManagement() {

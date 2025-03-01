@@ -1,6 +1,6 @@
 
 import React from 'react';
-import './Help.css';
+import '../Styles/Help.css';
 
 export function Help(){
   return (

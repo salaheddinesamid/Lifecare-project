@@ -1,7 +1,7 @@
 // StaffManagement.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './StaffManagement.css';
+import '../Styles/StaffManagement.css';
 
 const StaffManagement = () => {
   const [staff, setStaff] = useState([]);

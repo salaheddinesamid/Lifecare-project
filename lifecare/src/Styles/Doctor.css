@@ -27,6 +27,7 @@
   .doctor-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    justify-content: space-between;
     gap: 20px;
   }
   

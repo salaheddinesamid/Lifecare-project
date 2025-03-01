@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import './Card.css';
+import '../Styles/Card.css';
 
 export function Card(props) {
     const [title, setTitle] = useState(props.title);

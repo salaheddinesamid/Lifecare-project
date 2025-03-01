@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../Styles/Header.css";
-import logo from "../doctor.png";
+import logo from "../images/doctor.png";
 import MarkEmailUnreadIcon from '@mui/icons-material/MarkEmailUnread';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 //import ContrastIcon from '@mui/icons-material/Contrast';

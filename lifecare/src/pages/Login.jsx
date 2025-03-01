@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../doctor.png";
+import logo from "../images/doctor.png";
 import HealingIcon from '@mui/icons-material/Healing';
 import './Login.css';
 
@@ -13,12 +13,12 @@ export function Login() {
 
     const handleLogin = async () => {
         try {
-            const response = await axios.post('http://localhost:8080/admin/authenticate', { email, password }, {
+            const response = await axios.post('http://localhost:8080/api/admin/authenticate', { email, password }, {
                 headers: { 'Content-Type': 'application/json' }
             });
             localStorage.setItem('accessToken', response.data.accessToken);
             if (localStorage.getItem("accessToken") !== "null") {
-                navigate('/dashboard');
+                navigate('/reception/dashboard');
             } else {
                 throw new Error('Authentication failed');
             }

@@ -5,9 +5,12 @@ import { Login } from './pages/Login';
 import "bootstrap/dist/css/bootstrap.css"
 import "bootstrap/dist/js/bootstrap.js"
 import { Dashboard } from './pages/Dashboard';
-import { useEffect, useState } from 'react';
-import { AppointmentDetails } from './Components/AppointmentDetails';
+import { lazy, useEffect, useState } from 'react';
+// Lazy loading : 
+
+//import { AppointmentDetails } from './Components/AppointmentDetails';
 import { Home } from './pages/Home';
+const AppointmentDetails = lazy(()=> import ('./Components/AppointmentDetails'))
 
 function App() {
   const [mode, setMode] = useState(localStorage.getItem("mode") || "light");

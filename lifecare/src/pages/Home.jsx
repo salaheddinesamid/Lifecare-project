@@ -7,7 +7,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GoogleIcon from '@mui/icons-material/Google';
 import PhoneForwardedIcon from '@mui/icons-material/PhoneForwarded';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import doctorLogo from "../doctorhome.png";
+import doctorLogo from "../images/doctorhome.png";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import './AppointmentForm.css'; // Assuming you have a CSS file

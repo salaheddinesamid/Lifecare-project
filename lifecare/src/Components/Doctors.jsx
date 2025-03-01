@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import maleDoc from "./doctor_char_male.jpg";
-import femaleDoc from "./doctor_char_female.jpg";
-import './Doctor.css'; // Import CSS file
+import maleDoc from "../images/doctor_char_male.jpg";
+import femaleDoc from "../images/doctor_char_female.jpg";
+import '../Styles/Doctor.css'; // Import CSS file
+import { Avatar } from "@mui/material";
+import { orange } from "@mui/material/colors";
 
 export function Doctors() {
     const [doctors, setDoctors] = useState([]);
@@ -10,7 +12,7 @@ export function Doctors() {
 
     useEffect(() => {
         if (token) {
-            axios.get('http://localhost:8080/doctor/', {
+            axios.get('http://localhost:8080/api/doctor/', {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }
@@ -36,7 +38,7 @@ export function Doctors() {
                 {doctors.map((doctor) => (
                     <div className="doctor-item col-xl-12" key={doctor.id}>
                         <div className="doctor-image">
-                            <img src={doctor.gender === "Male" ? maleDoc : femaleDoc} alt="" className="doctor-avatar" />
+                            <Avatar sx={{ bgcolor: orange }}>{doctor.fullName[0]}</Avatar>
                         </div>
                         <div className="doctor-info">
                             <p>{doctor.fullName}</p>

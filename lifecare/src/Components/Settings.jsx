@@ -1,7 +1,7 @@
 // AdminSettings.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './Settings.css';
+import '../Styles/Settings.css';
 
 const Settings = () => {
   const [form, setForm] = useState({ firstName: '', lastName: '', email: '', password: '' });

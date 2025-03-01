@@ -4,7 +4,7 @@ import cities from "./cities_and_regions_combined.json";
 import diseasesFile from "./diagnosis.json";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import "./Appointment.css";
+import "../Styles/Appointment.css";
 import { Navigate, useNavigate } from "react-router-dom";
 
 export function Appointment() {

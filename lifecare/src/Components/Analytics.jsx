@@ -1,7 +1,7 @@
 // Analytics.js
 import React from 'react';
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import './Analytics.css';
+import '../Styles/Analytics.css';
 
 const data = [
   { name: 'Jan', patients: 400, revenue: 2400, expenses: 2400 },

@@ -1,7 +1,7 @@
 // src/Components/Nurse.js
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import './Nurse.css'; // Create and import a CSS file for styling
+import '../Styles/Nurse.css'; // Create and import a CSS file for styling
 
 export function Nurse() {
     const [nurses, setNurses] = useState([]);
