@@ -6,20 +6,15 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "../Styles/Appointment.css";
 import { Navigate, useNavigate } from "react-router-dom";
+import BasicTimePicker from "./TimePicker";
+import BasicDatePicker from "./Datepicker";
 
 export function Appointment() {
-  const [listOfDoctors, setListOfDoctors] = useState([]);
+  //const [listOfDoctors, setListOfDoctors] = useState([]);
   const [appointments, setAppointments] = useState([]);
   const [view, setView] = useState(0);
   const token = localStorage.getItem('accessToken');
-  
-  useEffect(() => {
-    axios.get('http://localhost:8080/doctor', {
-      headers: { "Authorization": `Bearer ${token}` }
-    })
-      .then(res => setListOfDoctors(res.data))
-      .catch(error => console.error(error));
-  }, [token]);
+
 
   useEffect(() => {
     axios.get("http://localhost:8080/api/appointment/get_all", {
@@ -29,11 +24,12 @@ export function Appointment() {
       .catch(error => console.error(error));
   }, [token]);
 
+
   const components = [
     {
       id: 0,
       name: "Appointment Management",
-      view: <AppointmentManagement appointments={appointments} />,
+      view: <AppointmentManagement appointments={appointments}/>,
     },
     {
       id: 1,
@@ -44,7 +40,7 @@ export function Appointment() {
 
   return (
     <div className="appointment-container">
-      <div className="tabs mt-3 mb-4 ">
+      <div className="tabs mb-4 ">
         {components.map((component) => (
           <button key={component.id} className="btn ms-3 me-3" style={{
             backgroundColor:"#22d3ee",
@@ -64,13 +60,19 @@ export function Appointment() {
 function AddAppointment({ setView, token }) {
   const [selectedDate, setSelectedDate] = useState(null);
   const [disease, setDisease] = useState('');
-  const [patient, setPatient] = useState('');
-  const [idNumber, setIdNumber] = useState('');
-  const [dateOfBirth, setDateOfBirth] = useState('');
-  const [address, setAddress] = useState('');
-  const [postalCode, setPostalCode] = useState('');
+  const [location,setLocation] = useState('')
+  const [patientDto, setPatientDto] = useState({
+    firstName : "",
+    lastName : "",
+    nationalId : "",
+    address : "",
+    email : "",
+    phone : ""
+  });
   const [totalPrice, setTotalPrice] = useState(0);
   const [termsChecked, setTermsChecked] = useState(false);
+  const [showSuccess,setShowSuccess] = useState(false)
+
 
   useEffect(() => {
     const getCurrentDate = () => {
@@ -83,7 +85,6 @@ function AddAppointment({ setView, token }) {
   useEffect(() => {
     if (selectedDate) {
       const formattedDate = formatDate(selectedDate);
-      // Now you can use formattedDate in your appointmentObject
     }
   }, [selectedDate]);
 
@@ -98,17 +99,14 @@ function AddAppointment({ setView, token }) {
     const formattedDate = formatDate(selectedDate);
 
     const appointmentObject = {
-      patient,
-      idNumber,
-      address,
-      date: formattedDate,
-      totalPrice,
-      dateOfBirth,
-      postalCode,
-      disease
+      patientDto,
+      disease,
+      location,
+      selectedDate : formattedDate,
+      totalPrice
     };
 
-    axios.post('http://localhost:8080/appointments/new', appointmentObject, {
+    axios.post('http://localhost:8080/api/appointment/new', appointmentObject, {
       headers: {
         'Content-Type': 'application/json',
         "Authorization": `Bearer ${token}`
@@ -116,22 +114,23 @@ function AddAppointment({ setView, token }) {
     })
     .then(response => {
       console.log("Appointment request sent successfully:", response.data);
-      setView(0); // Switch view back to Appointment Management after successful submission
+      setView(0); 
     })
     .catch(error => {
       console.error("Error sending appointment request:", error);
-      // Handle error state or feedback to user
     });
+
+    setShowSuccess(true);
+    setTimeout(() => setShowSuccess(false), 3000);
+
   };
 
   const checkForm = () => {
     return (
-      patient.trim() !== '' &&
-      idNumber.trim() !== '' &&
-      address.trim() !== '' &&
-      postalCode.trim() !== '' &&
+      patientDto.firstName.trim() !== '' &&
+      patientDto.nationalId.trim() !== '' &&
+      patientDto.address.trim() !== '' &&
       disease.trim() !== '' &&
-      //dateOfBirth.trim() !== '' &&
       termsChecked
     );
   };
@@ -145,28 +144,39 @@ function AddAppointment({ setView, token }) {
 
   return (
     <div className="add-appointment-container">
+      {showSuccess && (
+                <div style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    background: 'rgba(0, 128, 0, 0.8)', 
+                    color: 'white',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '24px',
+                    fontWeight: 'bold',
+                    zIndex: 1000,
+                }}>
+                    Requested Successfully!
+                </div>
+            )}
+      <h2>Personal Information</h2>
       <div className="form-group">
-        <input type="text" placeholder="Full Name" className="form-control" value={patient} onChange={(e) => setPatient(e.target.value)} />
-        <input type="text" placeholder="ID Number" className="form-control" value={idNumber} onChange={(e) => setIdNumber(e.target.value)} />
+        <input type="text" placeholder="First Name" className="form-control" value={patientDto.firstName} onChange={(e) => setPatientDto({...patientDto, firstName : e.target.value})} />
+        <input type="text" placeholder="Last Name" className="form-control" value={patientDto.lastName} onChange={(e) => setPatientDto({...patientDto, lastName : e.target.value})} />
       </div>
       <div className="form-group">
-        <DatePicker
-          selected={selectedDate}
-          onChange={date => setSelectedDate(date)}
-          dateFormat="dd/MM/yyyy"
-          placeholderText="Select Date"
-          className="form-control"
-        />
-        <select name="city" id="city-select" className="form-select">
-          {cities.map((city) => (
-            <option key={city.id} value={city.id}>{city.name}</option>
-          ))}
-        </select>
+        <input type="text" placeholder="National ID" className="form-control" value={patientDto.nationalId} onChange={(e) => setPatientDto({...patientDto, nationalId : e.target.value})} />
+        <input type="text" placeholder="Address" className="form-control" value={patientDto.address} onChange={(e) => setPatientDto({...patientDto, address : e.target.value})} />
       </div>
       <div className="form-group">
-        <input type="text" placeholder="Address" className="form-control" value={address} onChange={(e) => setAddress(e.target.value)} />
-        <input type="text" placeholder="Postal Code" className="form-control" value={postalCode} onChange={(e) => setPostalCode(e.target.value)} />
+        <input type="text" placeholder="example@domain.com" className="form-control" value={patientDto.email} onChange={(e) => setPatientDto({...patientDto, email : e.target.value})} />
+        <input type="text" placeholder="Phone number" className="form-control" value={patientDto.phone} onChange={(e) => setPatientDto({...patientDto, phone : e.target.value})} />
       </div>
+      <h2>Appointment Details</h2>
       <div className="form-group">
         <select className="form-select" onChange={handleDiseaseChange}>
           <option value="">Select Disease</option>
@@ -174,22 +184,37 @@ function AddAppointment({ setView, token }) {
             <option key={disease.id} value={disease.name}>{disease.name}</option>
           ))}
         </select>
-        <h4>Total Price: {totalPrice} £</h4>
+        <select name="city" id="city-select" className="form-select" onChange={(e)=>setLocation(e.target.value)}>
+          {cities.map((city) => (
+            <option key={city.id} value={city.id}>{city.name}</option>
+          ))}
+        </select>
+
       </div>
-      <div className="terms">
-        <input type="checkbox" checked={termsChecked} onChange={() => setTermsChecked(!termsChecked)} />
-        <p>By signing up, you agree to our Terms, Privacy Policy and Cookies Policy.</p>
+      <div className="row">
+        <div className="form-group">
+        <BasicDatePicker/>
+        <BasicTimePicker/>
+        </div>
       </div>
       <div className="form-group">
-        <button className="btn btn-primary" onClick={submitRequest} disabled={!checkForm()}>Confirm</button>
+        <h4>Total Price: {totalPrice} £</h4>
+      </div>
+      <div className="form-group">
+        <button className="btn btn-primary" onClick={submitRequest}>Confirm</button>
         <button className="btn btn-danger" onClick={() => setView(0)}>Cancel</button>
       </div>
     </div>
   );
 }
 
-function AppointmentManagement({ appointments }) {
+function AppointmentManagement({appointments}) {
   const navigate = useNavigate();
+  const [filter, setFilter] = useState("ALL");
+      const filteredAppointments = appointments.filter(appointment => {
+          if (filter === "ALL") return true;
+          return appointment.status === filter;
+      });
   function naviagteAppointment(appointment){
     localStorage.setItem("target_appointment",JSON.stringify(appointment))
     navigate("/appointment/details")
@@ -204,27 +229,40 @@ function AppointmentManagement({ appointments }) {
   }
   return (
     <div className="appointment-management">
+      <div className="mb-3">
+                <button className="btn btn-primary me-2" onClick={() => setFilter("ALL")}>All</button>
+                <button className="btn btn-warning me-2" onClick={() => setFilter("IN REVIEW")}>IN REVIEW</button>
+                <button className="btn btn-success me-2" onClick={() => setFilter("COMPLETED")}>COMPLETED</button>
+                <button className="btn btn-danger" onClick={() => setFilter("CANCELED")}>CANCELED</button>
+            </div>
       <div className="appointment-table-container">
         {
           appointments && appointments.length !== 0? 
           <table className="appointment-table">
           <thead>
             <tr>
-              <th>Name</th>
-              <th>ID Number</th>
-              <th>Address</th>
+              <th>Full Name</th>
+              <th>National ID</th>
+              <th>Dieseas</th>
               <th>Date</th>
-              <th>Total Price</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
-            {appointments.map((appointment) => (
-              <tr key={appointment.id} onClick={()=>naviagteAppointment(appointment)}>
-                <td>{appointment.patient}</td>
-                <td>{appointment.idNumber}</td>
-                <td>{appointment.address}</td>
+            {filteredAppointments.map((appointment) => (
+              <tr key={appointment.id} onClick={()=>naviagteAppointment(appointment)} style={{cursor : "pointer"}}>
+                <td>{appointment.patient.firstName +" "+ appointment.patient.lastName}</td>
+                <td>{appointment.patient.nationalId}</td>
+                <td>{appointment.disease}</td>
                 <td>{appointment.date}</td>
-                <td>{appointment.totalPrice} £</td>
+                <td>
+                                        <span className={`badge 
+                                            ${appointment.status === "COMPLETED" ? "bg-success" : 
+                                            appointment.status === "IN REVIEW" ? "bg-warning" : 
+                                            "bg-secondary"}`}>
+                                            {appointment.status}
+                                        </span>
+                                    </td>
               </tr>
             ))}
           </tbody>

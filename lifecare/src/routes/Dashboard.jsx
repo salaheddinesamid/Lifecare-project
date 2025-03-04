@@ -2,17 +2,18 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Dash } from "../Components/Dash";
 import { Header } from "../Components/Header";
-import StaffManagement from "../Components/StaffManagement";
 import { Appointment } from "../Components/Appointment";
 import { PatientManagement } from "../Components/PatientManagement";
-import { Nurse } from "../Components/Nurse"; // Assuming Nurse component exists
-import { History } from "../Components/History"; // Import the History component
+import { History } from "../Components/History"; 
 import LogoutIcon from '@mui/icons-material/Logout';
 import Analytics from "../Components/Analytics";
 import { Help } from "../Components/Help";
 import Settings from "../Components/Settings";
 import moment from 'moment';
-import "../Styles/Dashboard.css"; // Ensure this CSS file is correctly imported
+import "../Styles/Dashboard.css"; 
+import { RoomManagement } from "../Components/Room";
+import Bills from "../Components/Billing";
+import { AdminProvider } from "../context/AdminContext";
 
 export function Dashboard() {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
@@ -24,7 +25,7 @@ export function Dashboard() {
     localStorage.setItem('theme', theme);
   }, [theme]);
 
-  // Set theme based on time
+  
   useEffect(() => {
     const hour = moment().hour();
     setTheme(hour >= 6 && hour < 18 ? 'light' : 'dark');
@@ -34,12 +35,10 @@ export function Dashboard() {
     { id: 1, name: "Dashboard", View: <Dash /> },
     { id: 2, name: "Appointments", View: <Appointment /> },
     { id: 3, name: "Patients", View: <PatientManagement /> },
-    { id: 4, name: "Staff Management", View: <StaffManagement /> },
     { id : 5, name: "Medical Records"},
-    { id : 6, name: "Billing & Invoices"},
-    { id : 6, name: "Rooms & Beds"},
+    { id : 4, name: "Billing & Invoices", View : <Bills/>},
+    { id : 6, name: "Rooms & Beds", View : <RoomManagement/>},
     { id: 7, name: "Analytics", View: <Analytics /> },
-    { id: 8, name: "Nurse", View: <Nurse /> }, // Add Nurse component
     { id: 9, name: "History", View: <History /> }, // Add History component
     { id: 10, name: "Help", View: <Help /> },
     { id: 11, name: "Settings", View: <Settings /> }
@@ -123,7 +122,9 @@ export function Dashboard() {
         </div>
       </div>
       <div className="main-content" style={{ flex: 1, padding: '20px' }}>
-        <Header />
+        <AdminProvider>
+          <Header />
+        </AdminProvider>
         <div className="content-container" style={{ marginTop: '20px' }}>
           {services.map((service) => (
             <div key={service.id} style={{ display: service.id === targetView ? 'block' : 'none' }}>

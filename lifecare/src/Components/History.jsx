@@ -8,7 +8,7 @@ export function History() {
   const [history, setHistory] = useState([]);
 
   useEffect(() => {
-    fetchHistory();
+    //fetchHistory();
   }, []);
 
   const fetchHistory = () => {
@@ -54,7 +54,6 @@ export function History() {
               <th>Action</th>
               <th>User</th>
               <th>Timestamp</th>
-              <th>Delete</th>
             </tr>
           </thead>
           <tbody>

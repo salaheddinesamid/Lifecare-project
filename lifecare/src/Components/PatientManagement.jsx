@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import '../Styles/PatientManagement.css';
-import TuneIcon from '@mui/icons-material/Tune';
+import "../Styles/PatientManagement.css";
+import TuneIcon from "@mui/icons-material/Tune";
+import { Table, TableHead, TableBody, TableCell, TableRow, TableContainer, Paper, TextField, Button, Typography } from "@mui/material";
 
 export function PatientManagement() {
   const [patients, setPatients] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    axios.get('http://localhost:8080/api/patient/get_all')
+    axios.get("http://localhost:8080/api/patient/get_all")
       .then(response => {
         setPatients(response.data);
       })
       .catch(error => {
-        console.error("There was an error fetching the patients!", error);
+        console.error("Error fetching patients!", error);
       });
   }, []);
 
@@ -22,56 +23,64 @@ export function PatientManagement() {
   };
 
   const filteredPatients = patients.filter(patient => {
-    if (searchTerm && patient.fullName && patient.id) {
-      return (
-        patient.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        patient.id.toString().includes(searchTerm)
-      );
-    }
-    return true; // Return true to include all patients if searchTerm or patient.fullName/id is null/undefined
+    return (
+      (patient.fullName && patient.fullName.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (patient.patientId && patient.patientId.toString().includes(searchTerm))
+    );
   });
 
   return (
     <div className="patient-management-container">
+      <Typography variant="h4" className="title">
+        Patient Management
+      </Typography>
+      
       <div className="search-filter">
-        <input
-          className="form-control search-input"
-          placeholder="Search patients name, id"
+        <TextField
+          className="search-input"
+          label="Search by Name or ID"
+          variant="outlined"
           value={searchTerm}
           onChange={handleSearchChange}
+          fullWidth
         />
-        <button className="btn advanced-filter">
+        <Button className="filter-btn">
           <TuneIcon />
-        </button>
+        </Button>
       </div>
-      <div className="patient-table">
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Full Name</th>
-              <th>National ID</th>
-              <th>Age</th>
-              <th>Address</th>
-              <th>Country</th>
-              <th>Email</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredPatients.map((patient) => (
-              <tr key={patient.id}>
-                <td>{patient.id}</td>
-                <td>{patient.fullName}</td>
-                <td>{patient.nationalId}</td>
-                <td>{patient.age}</td>
-                <td>{patient.address}</td>
-                <td>{patient.country}</td>
-                <td>{patient.email}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+
+      <TableContainer component={Paper} className="patient-table">
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell><b>ID</b></TableCell>
+              <TableCell><b>Full Name</b></TableCell>
+              <TableCell><b>National ID</b></TableCell>
+              <TableCell><b>Address</b></TableCell>
+              <TableCell><b>Email</b></TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {filteredPatients.length > 0 ? (
+              filteredPatients.map((patient) => (
+                <TableRow key={patient.patientId}>
+                  <TableCell>{patient.patientId || "N/A"}</TableCell>
+                  <TableCell>{patient.fullName || "N/A"}</TableCell>
+                  <TableCell>{patient.nationalId || "N/A"}</TableCell>
+                  <TableCell>{patient.address || "N/A"}</TableCell>
+                  <TableCell>{patient.email || "N/A"}</TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={5} style={{ textAlign: "center" }}>
+                  No Patients Found
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   );
 }

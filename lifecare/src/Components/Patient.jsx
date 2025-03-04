@@ -16,7 +16,7 @@ export function Patient() {
   });
 
   useEffect(() => {
-    axios.get('http://localhost:8080/patient-management/get_all')
+    axios.get('http://localhost:8080/api/patient/get_all')
       .then(response => {
         setPatients(response.data);
       })
@@ -30,25 +30,6 @@ export function Patient() {
     setPatient({ ...patient, [name]: value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    axios.post('http://localhost:8080/patient-management/new_patient', patient)
-      .then(response => {
-        setPatients([...patients, response.data]);
-        setPatient({
-          fullName: '',
-          nationalId: '',
-          age: '',
-          address: '',
-          country: '',
-          email: ''
-        });
-      })
-      .catch(error => {
-        console.error("There was an error adding the patient!", error);
-      });
-  };
-
   return (
     <div className="patient-container">
       <ul className="patient-list">
@@ -60,7 +41,7 @@ export function Patient() {
         <input
           type="text"
           name="fullName"
-          value={patient.fullName}
+          value={patient.firstName}
           onChange={handleChange}
           placeholder="Full Name"
           required

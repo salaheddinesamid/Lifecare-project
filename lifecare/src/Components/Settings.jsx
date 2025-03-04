@@ -4,28 +4,24 @@ import axios from 'axios';
 import '../Styles/Settings.css';
 
 const Settings = () => {
-  const [form, setForm] = useState({ firstName: '', lastName: '', email: '', password: '' });
+  const adminDetails = JSON.parse(localStorage.getItem("admin"));
+  const [newAdminDto, setForm] = useState({ firstName: '', lastName: '', email: '', password: '' });
   const [message, setMessage] = useState('');
   const [adminEmail,setAdminEmail] = useState("")
   const token = localStorage.getItem("accessToken")
 
-  useEffect(()=>{
-    axios.get("http://localhost:8080/admin/getadmin", {
-        headers: { "Authorization": `Bearer ${token}` }
-      }).then(res=>setAdminEmail(res.data.email))
-      .then(localStorage.setItem("adminEmail",adminEmail))
-  },[])
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
+    setForm({ ...newAdminDto, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Save settings
-    // Here you would typically send a request to your server to save the settings
-    axios.put(`http://localhost:8080/admin/settings/${adminEmail}`, form)
+
+
+    axios.put(`http://localhost:8080/api/admin/settings/${adminEmail}`, newAdminDto)
       .then(response => {
         console.log('Settings saved', response.data);
         setMessage('Settings saved successfully');
@@ -48,7 +44,7 @@ const Settings = () => {
           <input
             type="text"
             name="firstName"
-            value={form.firstName}
+            value={adminDetails.firstName}
             onChange={handleChange}
             placeholder="First Name"
             required
@@ -59,7 +55,7 @@ const Settings = () => {
           <input
             type="text"
             name="lastName"
-            value={form.lastName}
+            value={adminDetails.lastName}
             onChange={handleChange}
             placeholder="Last Name"
             required
@@ -70,7 +66,7 @@ const Settings = () => {
           <input
             type="email"
             name="email"
-            value={form.email}
+            value={newAdminDto.email}
             onChange={handleChange}
             placeholder="Email"
             required
@@ -81,7 +77,7 @@ const Settings = () => {
           <input
             type="password"
             name="password"
-            value={form.password}
+            value={newAdminDto.password}
             onChange={handleChange}
             placeholder="Password"
             required

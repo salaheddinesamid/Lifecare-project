@@ -1,9 +1,10 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../images/doctor.png";
 import HealingIcon from '@mui/icons-material/Healing';
 import './Login.css';
+import AdminContext from "../context/AdminContext";
 
 export function Login() {
     const [email, setEmail] = useState("");
@@ -11,14 +12,18 @@ export function Login() {
     const [authenticationFailed, setAuthenticationFailed] = useState(false);
     const navigate = useNavigate();
 
+    const {adminDetails, login} = useContext(AdminContext);
+
     const handleLogin = async () => {
         try {
             const response = await axios.post('http://localhost:8080/api/admin/authenticate', { email, password }, {
                 headers: { 'Content-Type': 'application/json' }
             });
-            localStorage.setItem('accessToken', response.data.accessToken);
+            localStorage.setItem('accessToken', response.data.tokenDTO.bearer);
             if (localStorage.getItem("accessToken") !== "null") {
-                navigate('/reception/dashboard');
+               localStorage.setItem("admin",JSON.stringify(response.data))
+                navigate('/admin/dashboard');
+                
             } else {
                 throw new Error('Authentication failed');
             }

@@ -12,6 +12,7 @@ export function Doctors() {
 
     useEffect(() => {
         if (token) {
+            console.log("Token:", token);
             axios.get('http://localhost:8080/api/doctor/', {
                 headers: {
                     "Authorization": `Bearer ${token}`
@@ -19,7 +20,11 @@ export function Doctors() {
             }).then((res) => {
                 setDoctors(res.data);
             }).catch((error) => {
-                console.error("Error fetching doctors:", error);
+                if (error.response) {
+                    console.error("Error fetching doctors:", error.response.status, error.response.data);
+                } else {
+                    console.error("Error:", error);
+                }
             });
         }
     }, [token]);

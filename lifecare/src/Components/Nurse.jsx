@@ -9,14 +9,19 @@ export function Nurse() {
 
     useEffect(() => {
         if (token) {
-            axios.get('http://localhost:8080/staff-management/get_all_nurses', {
+            console.log("Token:", token);
+            axios.get('http://localhost:8080/api/nurse/get_all', {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }
             }).then((res) => {
                 setNurses(res.data);
             }).catch((error) => {
-                console.error("Error fetching nurses:", error);
+                if (error.response) {
+                    console.error("Error fetching doctors:", error.response.status, error.response.data);
+                } else {
+                    console.error("Error:", error);
+                }
             });
         }
     }, [token]);
