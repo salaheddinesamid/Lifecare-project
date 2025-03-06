@@ -10,7 +10,6 @@ import BasicTimePicker from "./TimePicker";
 import BasicDatePicker from "./Datepicker";
 
 export function Appointment() {
-  //const [listOfDoctors, setListOfDoctors] = useState([]);
   const [appointments, setAppointments] = useState([]);
   const [view, setView] = useState(0);
   const token = localStorage.getItem('accessToken');
@@ -210,14 +209,19 @@ function AddAppointment({ setView, token }) {
 
 function AppointmentManagement({appointments}) {
   const navigate = useNavigate();
+
+  const [tabOpen,setTabOpen] = useState(true);
   const [filter, setFilter] = useState("ALL");
+
+  const [currentAppointmentDetails,setCurrentAppointmentDetails] = useState(null)
       const filteredAppointments = appointments.filter(appointment => {
           if (filter === "ALL") return true;
           return appointment.status === filter;
       });
-  function naviagteAppointment(appointment){
-    localStorage.setItem("target_appointment",JSON.stringify(appointment))
-    navigate("/appointment/details")
+
+  const displayAppointment = (appointmentDetails)=>{
+    setTabOpen(true);
+    setCurrentAppointmentDetails(appointmentDetails)
   }
 
   const NoDataAvailableException = () =>{
@@ -227,8 +231,51 @@ function AppointmentManagement({appointments}) {
       </div>
     )
   }
+
+  const AppointmentTab = ({appointmentDetails}) => {
+    return (
+      <div
+        className="row appointment-tab"
+        style={{
+          display: tabOpen ? "block" : "none",
+          backgroundColor: "white",
+          flex: 2,
+          position: "absolute",
+          top: 200,
+          left: "25%",
+          padding: 30,
+          justifyContent: "center",
+          width: "50%",
+          height: "70%",
+          borderRadius: 20,
+          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+        }}
+      >
+        <div className="row d-flex justify-content-between align-items-center">
+          <div className="col">
+            <h2>Appointment Details</h2>
+          </div>
+          <div className="col text-end">
+            <button
+              className="btn btn-danger"
+              onClick={() => setTabOpen(false)}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+        <div className="mt-3">
+          <p><strong>Patient:</strong> {appointmentDetails?.patient.firstName || "N/A"}</p>
+          <p><strong>Date:</strong> {appointmentDetails?.date || "N/A"}</p>
+          <p><strong>Time:</strong> {appointmentDetails?.time || "N/A"}</p>
+          <p><strong>Doctor:</strong> {appointmentDetails?.doctor || "Not assigned yet"}</p>
+        </div>
+      </div>
+    );
+  };
   return (
     <div className="appointment-management">
+      <AppointmentTab appointmentDetails={currentAppointmentDetails}/>
       <div className="mb-3">
                 <button className="btn btn-primary me-2" onClick={() => setFilter("ALL")}>All</button>
                 <button className="btn btn-warning me-2" onClick={() => setFilter("IN REVIEW")}>IN REVIEW</button>
@@ -250,7 +297,7 @@ function AppointmentManagement({appointments}) {
           </thead>
           <tbody>
             {filteredAppointments.map((appointment) => (
-              <tr key={appointment.id} onClick={()=>naviagteAppointment(appointment)} style={{cursor : "pointer"}}>
+              <tr key={appointment.id} onClick={()=>displayAppointment(appointment)} style={{cursor : "pointer"}}>
                 <td>{appointment.patient.firstName +" "+ appointment.patient.lastName}</td>
                 <td>{appointment.patient.nationalId}</td>
                 <td>{appointment.disease}</td>

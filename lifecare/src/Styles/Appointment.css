@@ -1,5 +1,7 @@
 /* General Container */
 .appointment-container {
+  flex: 1;
+  position: "absolute";
   padding: 20px;
   background-color: #f8f9fa;
   border-radius: 8px;

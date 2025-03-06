@@ -1,4 +1,6 @@
 .appointment-management {
+  flex: 1;
+  position: relative;
     padding: 20px;
     background-color: #f8f9fa;
     border-radius: 8px;
