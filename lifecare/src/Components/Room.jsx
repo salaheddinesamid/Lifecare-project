@@ -50,7 +50,7 @@ export function RoomManagement() {
             <div className="row">
                 {filteredRooms.length > 0 ? (
                     filteredRooms.map((room) => (
-                        <div key={room} className="col-md-4">
+                        <div key={room.id} className="col-md-4">
                             <div className="card p-3 mb-3 shadow-sm">
                                 <h5>Room {room.roomNumber}</h5>
                                 <p><strong>Status:</strong> 

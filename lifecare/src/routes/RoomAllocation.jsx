@@ -19,7 +19,7 @@ export function RoomAllocation() {
 
     const [allocationDto, setAllocationDto] = useState({
         patientDto : newPatient,
-        roomId : currentRoom.id
+        roomId : currentRoom.roomId
     })
 
     const handleChange = (e) => {
