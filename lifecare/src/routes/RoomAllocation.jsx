@@ -7,7 +7,7 @@ export function RoomAllocation() {
     const navigate = useNavigate();
     const { currentRoom } = useContext(RoomContext);
     const [assignedPatient,setAssignedPatient] = useState(null)
-    const [showSuccess,setShowSuccess] = useState(false)
+    // const [showSuccess,setShowSuccess] = useState(false)
     const [newPatient, setNewPatient] = useState({
         firstName: "",
         lastName: "",
