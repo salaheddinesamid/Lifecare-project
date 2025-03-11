@@ -14,6 +14,7 @@ import "../Styles/Dashboard.css";
 import { RoomManagement } from "../Components/Room";
 import Bills from "../Components/Billing";
 import { AdminProvider } from "../context/AdminContext";
+import { Allocation } from "../Components/Allocation";
 
 export function Dashboard() {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
@@ -34,12 +35,13 @@ export function Dashboard() {
   const services = [
     { id: 1, name: "Dashboard", View: <Dash /> },
     { id: 2, name: "Appointments", View: <Appointment /> },
-    { id: 3, name: "Patients", View: <PatientManagement /> },
+    { id: 3, name: "Allocations", View: <Allocation /> },
+    { id: 4, name: "Patients", View: <PatientManagement /> },
     { id : 5, name: "Medical Records"},
-    { id : 4, name: "Billing & Invoices", View : <Bills/>},
-    { id : 6, name: "Rooms & Beds", View : <RoomManagement/>},
-    { id: 7, name: "Analytics", View: <Analytics /> },
-    { id: 9, name: "History", View: <History /> }, // Add History component
+    { id : 6, name: "Billing & Invoices", View : <Bills/>},
+    { id : 7, name: "Rooms & Beds", View : <RoomManagement/>},
+    { id: 8, name: "Analytics", View: <Analytics /> },
+    { id: 9, name: "History", View: <History /> },
     { id: 10, name: "Help", View: <Help /> },
     { id: 11, name: "Settings", View: <Settings /> }
   ];
